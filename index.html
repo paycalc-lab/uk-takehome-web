@@ -44,7 +44,9 @@
       const hours = parseFloat(hoursEl.value) || 0;
       const rate  = parseFloat(rateEl.value)  || 0;
       const gross = hours * rate;
-      outEl.textContent = `Overtime gross: ${money(gross)}`;
+      const takeHome = gross * 0.7;
+outEl.textContent = `Overtime gross: ${money(gross)} | Est. take-home (70%): ${money(takeHome)}`;
+
     }
 
     hoursEl.addEventListener('input', update);
