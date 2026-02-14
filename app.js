@@ -16,6 +16,8 @@ function update() {
     const salary = parseFloat(salaryEl.value) || 0;
   const monthlyGross = salary / 12;
   salaryOutEl.textContent = `Monthly gross: ${money(monthlyGross)}`;
+  const monthlyNet = monthlyGross * 0.70;
+netOutEl.textContent = `Est. monthly take-home (70%): ${money(monthlyNet)}`;
 
   const hours = parseFloat(hoursEl.value) || 0;
   const rate  = parseFloat(rateEl.value)  || 0;
