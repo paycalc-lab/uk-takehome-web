@@ -1,6 +1,8 @@
 const hoursEl = document.getElementById('hours');
 const rateEl  = document.getElementById('rate');
 const outEl   = document.getElementById('out');
+const salaryEl = document.getElementById('salary');
+const salaryOutEl = document.getElementById('salaryOut');
 
 function money(n) {
   return (Number.isFinite(n) ? n : 0).toLocaleString('en-GB', {
