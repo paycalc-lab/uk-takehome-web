@@ -24,4 +24,5 @@ function update() {
 
 hoursEl.addEventListener('input', update);
 rateEl.addEventListener('input', update);
+salaryEl.addEventListener('input', update);
 update();
