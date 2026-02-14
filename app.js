@@ -3,6 +3,7 @@ const rateEl  = document.getElementById('rate');
 const outEl   = document.getElementById('out');
 const salaryEl = document.getElementById('salary');
 const salaryOutEl = document.getElementById('salaryOut');
+const netOutEl = document.getElementById('netOut');
 
 function money(n) {
   return (Number.isFinite(n) ? n : 0).toLocaleString('en-GB', {
