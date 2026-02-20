@@ -1,5 +1,5 @@
 // app.js
-// PAYE Calc Lab – V1 UI Wiring
+// PAYE Calc Lab – V1 UI Wiring (plain language, orientation-first)
 // Single DOMContentLoaded
 // Single compute trigger
 // No duplicated logic
@@ -35,11 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
     netMonthlyEl.textContent = formatCurrency(result.netMonthly);
     netWeeklyEl.textContent = formatCurrency(result.netWeekly);
 
+    // Plain English labels (no jargon)
     breakdownEl.innerHTML = `
-      <div>Net Annual: ${formatCurrency(result.netAnnual)}</div>
-      <div>Pension Annual: ${formatCurrency(result.pensionAnnual)}</div>
-      <div>Total Tax Annual: ${formatCurrency(result.totalTaxAnnual)}</div>
-      <div>Overtime Net Impact (Monthly): ${formatCurrency(result.overtimeNetImpactMonthly)}</div>
+      <div><span>You keep each year</span><span>${formatCurrency(result.netAnnual)}</span></div>
+      <div><span>You invest into pension (per year)</span><span>${formatCurrency(result.pensionAnnual)}</span></div>
+      <div><span>Goes to tax and NI (per year)</span><span>${formatCurrency(result.totalTaxAnnual)}</span></div>
+      <div><span>Overtime changes your monthly take-home by</span><span>${formatCurrency(result.overtimeNetImpactMonthly)}</span></div>
     `;
   }
 
@@ -47,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     compute();
   });
+
+  // Optional: show results immediately with the default values
+  compute();
 });
 
 function formatCurrency(value) {
