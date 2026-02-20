@@ -15,10 +15,10 @@
 
   <form id="calcForm" class="card">
     <label for="salaryAnnual">Annual gross salary (£)</label>
-    <input id="salaryAnnual" type="number" min="0" step="100" value="30000" />
+    <input id="salaryAnnual" type="number" min="0" step="1" inputmode="decimal" value="30000" />
 
     <label for="pensionPct">Pension % (salary sacrifice)</label>
-    <input id="pensionPct" type="number" min="0" max="100" step="0.1" value="5" />
+    <input id="pensionPct" type="number" min="0" max="100" step="0.1" inputmode="decimal" value="5" />
 
     <label for="region">Tax region</label>
     <select id="region">
@@ -30,7 +30,7 @@
       <summary>+ Add overtime</summary>
 
       <label for="overtimeAnnual">Overtime (annual total £)</label>
-      <input id="overtimeAnnual" type="number" min="0" step="100" value="0" />
+      <input id="overtimeAnnual" type="number" min="0" step="1" inputmode="decimal" value="0" />
       <p class="hint">V1: enter the total overtime you expect over a year (annualised).</p>
     </details>
 
