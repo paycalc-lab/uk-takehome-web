@@ -1,6 +1,230 @@
-body { font-family: system-ui, Arial, sans-serif; margin: 24px; max-width: 720px; }
-input, button { font-size: 16px; padding: 10px; }
-label { display:block; margin: 14px 0 6px; }
-.card { padding: 16px; border: 1px solid #ddd; border-radius: 10px; }
-.result { margin-top: 14px; font-weight: 700; }
-small { color: #555; }
+/* styles.css
+   UK Pay Clarity (Lab) — V1 polish pass
+   Goals:
+   - Calm, professional, trust-first
+   - Strong hierarchy (Net Monthly dominates)
+   - Low cognitive load (spacing + typography)
+   - Minimal visual noise, no gimmicks
+*/
+
+:root{
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --muted-2: #64748b;
+  --border: rgba(15, 23, 42, 0.10);
+  --border-strong: rgba(15, 23, 42, 0.18);
+  --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 6px 16px rgba(15, 23, 42, 0.06);
+
+  --accent: #1e3a8a;       /* deep navy */
+  --accent-2: #0b2a6f;     /* darker */
+  --focus: rgba(30, 58, 138, 0.22);
+
+  --radius: 16px;
+  --radius-sm: 12px;
+
+  --pad: 22px;
+  --gap: 14px;
+  --max: 720px;
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.45;
+}
+
+h1{
+  max-width: var(--max);
+  margin: 34px auto 8px auto;
+  padding: 0 18px;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+}
+
+p{
+  max-width: var(--max);
+  margin: 0 auto 18px auto;
+  padding: 0 18px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.card{
+  max-width: var(--max);
+  margin: 16px auto;
+  padding: var(--pad);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+form.card{
+  padding-top: 20px;
+}
+
+label{
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+input, select{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: #fff;
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+}
+
+input::placeholder{
+  color: rgba(71, 85, 105, 0.65);
+}
+
+input:focus, select:focus{
+  border-color: rgba(30, 58, 138, 0.55);
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+button{
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+button:hover{
+  background: var(--accent-2);
+}
+
+button:active{
+  transform: translateY(1px);
+}
+
+.result{
+  margin: 0;
+  padding: 0;
+}
+
+.kicker{
+  color: var(--muted-2);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* Make Net Monthly feel like the answer */
+.big{
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 6px 0;
+}
+
+/* Net Weekly stays secondary */
+#netWeekly{
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Add a quiet divider feel within the output card */
+.card .result + .result{
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+details{
+  margin-top: 14px;
+}
+
+summary{
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 10px 0 6px;
+}
+
+summary::-webkit-details-marker{
+  display: none;
+}
+
+/* subtle “chevron” */
+summary::before{
+  content: "▸";
+  display: inline-block;
+  margin-right: 8px;
+  transform-origin: center;
+  transition: transform 0.12s ease;
+  color: var(--accent);
+}
+
+details[open] summary::before{
+  transform: rotate(90deg);
+}
+
+.hint{
+  margin: 8px 0 0;
+  color: var(--muted-2);
+  font-size: 13px;
+}
+
+/* Breakdown readability */
+.breakdown{
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(15, 23, 42, 0.02);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.breakdown > div{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.breakdown > div:last-child{
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+@media (max-width: 520px){
+  h1{ font-size: 28px; }
+  .big{ font-size: 38px; }
+  .card{ padding: 18px; margin: 12px auto; }
+}
