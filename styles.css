@@ -1,20 +1,22 @@
 /* styles.css
-   UK Pay Clarity (Lab) — V1 polish pass
+   UK Pay Clarity (Lab) — Orientation polish pass
    Goals:
    - Calm, professional, trust-first
-   - Strong hierarchy (Net Monthly dominates)
+   - Strong hierarchy (Monthly is the anchor)
+   - Plain, human framing (not “calculator vibes”)
    - Low cognitive load (spacing + typography)
-   - Minimal visual noise, no gimmicks
 */
 
 :root{
   --bg: #f6f7f9;
   --surface: #ffffff;
+  --surface-2: rgba(15, 23, 42, 0.02);
   --text: #0f172a;
   --muted: #475569;
   --muted-2: #64748b;
   --border: rgba(15, 23, 42, 0.10);
-  --border-strong: rgba(15, 23, 42, 0.18);
+  --border-strong: rgba(15, 23, 42, 0.16);
+  --divider: rgba(15, 23, 42, 0.08);
   --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
   --shadow-soft: 0 6px 16px rgba(15, 23, 42, 0.06);
 
@@ -26,36 +28,35 @@
   --radius-sm: 12px;
 
   --pad: 22px;
-  --gap: 14px;
   --max: 720px;
 }
 
 *{ box-sizing: border-box; }
 
-html, body{
-  height: 100%;
-}
+html, body{ height: 100%; }
 
 body{
   margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   background: var(--bg);
   color: var(--text);
   line-height: 1.45;
 }
 
-h1{
+.page{
   max-width: var(--max);
-  margin: 34px auto 8px auto;
+  margin: 34px auto 10px auto;
   padding: 0 18px;
+}
+
+h1{
+  margin: 0 0 8px 0;
   font-size: 34px;
   letter-spacing: -0.02em;
 }
 
-p{
-  max-width: var(--max);
-  margin: 0 auto 18px auto;
-  padding: 0 18px;
+.lead{
+  margin: 0 0 18px 0;
   color: var(--muted);
   font-size: 15px;
 }
@@ -70,14 +71,24 @@ p{
   box-shadow: var(--shadow-soft);
 }
 
-form.card{
-  padding-top: 20px;
+.answerCard{
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  box-shadow: var(--shadow);
+}
+
+.cardTitle{
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: 8px;
 }
 
 label{
   display: block;
   margin: 14px 0 6px;
-  font-weight: 600;
+  font-weight: 650;
   font-size: 14px;
   color: var(--text);
 }
@@ -93,10 +104,6 @@ input, select{
   outline: none;
 }
 
-input::placeholder{
-  color: rgba(71, 85, 105, 0.65);
-}
-
 input:focus, select:focus{
   border-color: rgba(30, 58, 138, 0.55);
   box-shadow: 0 0 0 4px var(--focus);
@@ -110,76 +117,28 @@ button{
   border-radius: var(--radius-sm);
   background: var(--accent);
   color: #fff;
-  font-weight: 700;
+  font-weight: 750;
   font-size: 16px;
   cursor: pointer;
   box-shadow: var(--shadow);
 }
 
-button:hover{
-  background: var(--accent-2);
-}
+button:hover{ background: var(--accent-2); }
+button:active{ transform: translateY(1px); }
 
-button:active{
-  transform: translateY(1px);
-}
-
-.result{
-  margin: 0;
-  padding: 0;
-}
-
-.kicker{
-  color: var(--muted-2);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-/* Make Net Monthly feel like the answer */
-.big{
-  font-size: 44px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  margin: 0 0 6px 0;
-}
-
-/* Net Weekly stays secondary */
-#netWeekly{
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-/* Add a quiet divider feel within the output card */
-.card .result + .result{
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-}
-
-details{
-  margin-top: 14px;
-}
+details{ margin-top: 14px; }
 
 summary{
   list-style: none;
   cursor: pointer;
   user-select: none;
-  font-weight: 700;
+  font-weight: 750;
   color: var(--accent);
   padding: 10px 0 6px;
 }
 
-summary::-webkit-details-marker{
-  display: none;
-}
+summary::-webkit-details-marker{ display: none; }
 
-/* subtle “chevron” */
 summary::before{
   content: "▸";
   display: inline-block;
@@ -189,9 +148,7 @@ summary::before{
   color: var(--accent);
 }
 
-details[open] summary::before{
-  transform: rotate(90deg);
-}
+details[open] summary::before{ transform: rotate(90deg); }
 
 .hint{
   margin: 8px 0 0;
@@ -199,7 +156,44 @@ details[open] summary::before{
   font-size: 13px;
 }
 
-/* Breakdown readability */
+.kicker{
+  color: var(--muted-2);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.answerBlock{
+  padding: 16px 0;
+}
+
+.answerBlock + .answerBlock{
+  border-top: 1px solid var(--divider);
+}
+
+.big{
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  margin: 0 0 8px 0;
+}
+
+.weekly{
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px 0;
+}
+
+.subnote{
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}
+
 .breakdown{
   margin-top: 10px;
   padding: 12px;
@@ -214,8 +208,8 @@ details[open] summary::before{
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--divider);
 }
 
 .breakdown > div:last-child{
@@ -225,6 +219,6 @@ details[open] summary::before{
 
 @media (max-width: 520px){
   h1{ font-size: 28px; }
-  .big{ font-size: 38px; }
+  .big{ font-size: 40px; }
   .card{ padding: 18px; margin: 12px auto; }
 }
