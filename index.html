@@ -10,15 +10,20 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='48'%3E%C2%A3%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-  <h1>UK pay clarity</h1>
-  <p>Calm, accurate take-home. No fluff.</p>
+  <header class="page">
+    <h1>UK pay clarity</h1>
+    <p class="lead">See where you’re going — calmly, clearly, without jargon.</p>
+  </header>
 
   <form id="calcForm" class="card">
-    <label for="salaryAnnual">Annual gross salary (£)</label>
+    <div class="cardTitle">Your pay setup</div>
+
+    <label for="salaryAnnual">Annual salary (£)</label>
     <input id="salaryAnnual" type="number" min="0" step="1" inputmode="decimal" value="30000" />
 
-    <label for="pensionPct">Pension % (salary sacrifice)</label>
+    <label for="pensionPct">Pension %</label>
     <input id="pensionPct" type="number" min="0" max="100" step="0.1" inputmode="decimal" value="5" />
+    <p class="hint">This assumes salary sacrifice (it reduces tax and NI on your salary).</p>
 
     <label for="region">Tax region</label>
     <select id="region">
@@ -29,31 +34,35 @@
     <details>
       <summary>+ Add overtime</summary>
 
-      <label for="overtimeAnnual">Overtime (annual total £)</label>
+      <label for="overtimeAnnual">Overtime total for the year (£)</label>
       <input id="overtimeAnnual" type="number" min="0" step="1" inputmode="decimal" value="0" />
-      <p class="hint">V1: enter the total overtime you expect over a year (annualised).</p>
+      <p class="hint">Enter the total overtime you expect over a year (annualised).</p>
     </details>
 
-    <button type="submit">Calculate</button>
+    <button type="submit">Show my take-home</button>
   </form>
 
-  <div class="card">
-    <div class="result">
-      <div class="kicker">Net monthly</div>
+  <section class="card answerCard">
+    <div class="cardTitle">Your take-home</div>
+
+    <div class="answerBlock">
+      <div class="kicker">You take home each month</div>
       <div id="netMonthly" class="big">£0.00</div>
+      <div class="subnote">After tax and National Insurance.</div>
     </div>
 
-    <div class="result">
-      <div class="kicker">Net weekly</div>
-      <div id="netWeekly">£0.00</div>
+    <div class="answerBlock smallBlock">
+      <div class="kicker">You take home each week</div>
+      <div id="netWeekly" class="weekly">£0.00</div>
+      <div class="subnote">Helpful for comparing offers quickly.</div>
     </div>
 
     <details>
-      <summary>Show breakdown</summary>
+      <summary>Show the simple breakdown</summary>
       <div id="breakdown" class="breakdown"></div>
-      <p class="hint">Student loan not included (V1).</p>
+      <p class="hint">Student loan isn’t included (V1).</p>
     </details>
-  </div>
+  </section>
 
   <script type="module" src="app.js"></script>
 </body>
