@@ -1,33 +1,58 @@
-const hoursEl = document.getElementById('hours');
-const rateEl  = document.getElementById('rate');
-const outEl   = document.getElementById('out');
-const salaryEl = document.getElementById('salary');
-const salaryOutEl = document.getElementById('salaryOut');
-const netOutEl = document.getElementById('netOut');
+// app.js
+// PAYE Calc Lab – V1 UI Wiring
+// Single DOMContentLoaded
+// Single compute trigger
+// No duplicated logic
 
-function money(n) {
-  return (Number.isFinite(n) ? n : 0).toLocaleString('en-GB', {
-    style: 'currency',
-    currency: 'GBP'
+import { calcNet } from "./payeEngine.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("calcForm");
+
+  const salaryInput = document.getElementById("salaryAnnual");
+  const pensionInput = document.getElementById("pensionPct");
+  const regionInput = document.getElementById("region");
+  const overtimeInput = document.getElementById("overtimeAnnual");
+
+  const netMonthlyEl = document.getElementById("netMonthly");
+  const netWeeklyEl = document.getElementById("netWeekly");
+  const breakdownEl = document.getElementById("breakdown");
+
+  function compute() {
+    const salaryAnnual = parseFloat(salaryInput.value) || 0;
+    const pensionPct = parseFloat(pensionInput.value) || 0;
+    const region = regionInput.value || "rUK";
+    const overtimeAnnual = parseFloat(overtimeInput.value) || 0;
+
+    const result = calcNet({
+      taxYear: "2025/26",
+      region,
+      salaryAnnual,
+      pensionPct,
+      overtimeAnnual,
+    });
+
+    netMonthlyEl.textContent = formatCurrency(result.netMonthly);
+    netWeeklyEl.textContent = formatCurrency(result.netWeekly);
+
+    breakdownEl.innerHTML = `
+      <div>Net Annual: ${formatCurrency(result.netAnnual)}</div>
+      <div>Pension Annual: ${formatCurrency(result.pensionAnnual)}</div>
+      <div>Total Tax Annual: ${formatCurrency(result.totalTaxAnnual)}</div>
+      <div>Overtime Net Impact (Monthly): ${formatCurrency(result.overtimeNetImpactMonthly)}</div>
+    `;
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    compute();
   });
+});
+
+function formatCurrency(value) {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+    maximumFractionDigits: 2,
+  }).format(value);
 }
-
-function update() {
-    const salary = parseFloat(salaryEl.value) || 0;
-  const monthlyGross = salary / 12;
-  salaryOutEl.textContent = `Monthly gross: ${money(monthlyGross)}`;
-  const monthlyNet = monthlyGross * 0.70;
-netOutEl.textContent = `Est. monthly take-home (70%): ${money(monthlyNet)}`;
-
-  const hours = parseFloat(hoursEl.value) || 0;
-  const rate  = parseFloat(rateEl.value)  || 0;
-  const gross = hours * rate;
-  const takeHome = gross * 0.70;
-
-  outEl.textContent = `Overtime gross: ${money(gross)} | Est. take-home (70%): ${money(takeHome)}`;
-}
-
-hoursEl.addEventListener('input', update);
-rateEl.addEventListener('input', update);
-salaryEl.addEventListener('input', update);
-update();
