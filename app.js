@@ -1,12 +1,13 @@
 // app.js
-// PAYE Calc Lab – V1 UI Wiring (plain language, orientation-first)
+// UK Pay Clarity — Free + Premium Ready (no behaviour change yet)
 // Single DOMContentLoaded
 // Single compute trigger
-// No duplicated logic
+// Engine untouched
 
 import { calcNet } from "./payeEngine.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const form = document.getElementById("calcForm");
 
   const salaryInput = document.getElementById("salaryAnnual");
@@ -18,7 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const netWeeklyEl = document.getElementById("netWeekly");
   const breakdownEl = document.getElementById("breakdown");
 
+  // Premium root (inactive for now)
+  const premiumRoot = document.getElementById("premium-root");
+  if (premiumRoot) {
+    premiumRoot.setAttribute("data-premium", "false");
+  }
+
   function compute() {
+
     const salaryAnnual = parseFloat(salaryInput.value) || 0;
     const pensionPct = parseFloat(pensionInput.value) || 0;
     const region = regionInput.value || "rUK";
@@ -29,13 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
       region,
       salaryAnnual,
       pensionPct,
-      overtimeAnnual,
+      overtimeAnnual
     });
 
     netMonthlyEl.textContent = formatCurrency(result.netMonthly);
     netWeeklyEl.textContent = formatCurrency(result.netWeekly);
 
-    // Plain English labels (no jargon)
     breakdownEl.innerHTML = `
       <div><span>You keep each year</span><span>${formatCurrency(result.netAnnual)}</span></div>
       <div><span>You invest into pension (per year)</span><span>${formatCurrency(result.pensionAnnual)}</span></div>
@@ -49,14 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
     compute();
   });
 
-  // Optional: show results immediately with the default values
+  // Run once on load
   compute();
+
 });
 
 function formatCurrency(value) {
   return new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: "GBP",
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 2
   }).format(value);
 }
