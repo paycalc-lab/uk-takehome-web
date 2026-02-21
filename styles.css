@@ -1,10 +1,7 @@
 /* styles.css
-   UK Pay Clarity (Lab) — Orientation polish pass
-   Goals:
-   - Calm, professional, trust-first
-   - Strong hierarchy (Monthly is the anchor)
-   - Plain, human framing (not “calculator vibes”)
-   - Low cognitive load (spacing + typography)
+   UK Pay Clarity (Lab) — Free UI (frozen) + Premium-ready hooks
+   Goal: No visual change from Free baseline.
+   Premium UI will be injected into #premium-root later.
 */
 
 :root{
@@ -20,8 +17,8 @@
   --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
   --shadow-soft: 0 6px 16px rgba(15, 23, 42, 0.06);
 
-  --accent: #1e3a8a;       /* deep navy */
-  --accent-2: #0b2a6f;     /* darker */
+  --accent: #1e3a8a;
+  --accent-2: #0b2a6f;
   --focus: rgba(30, 58, 138, 0.22);
 
   --radius: 16px;
@@ -32,7 +29,6 @@
 }
 
 *{ box-sizing: border-box; }
-
 html, body{ height: 100%; }
 
 body{
@@ -221,4 +217,11 @@ details[open] summary::before{ transform: rotate(90deg); }
   h1{ font-size: 28px; }
   .big{ font-size: 40px; }
   .card{ padding: 18px; margin: 12px auto; }
+}
+
+/* ---------------- Premium-ready hooks ----------------
+   Keep premium root hidden until we implement Premium UI.
+*/
+#premium-root{
+  display: none;
 }
