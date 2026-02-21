@@ -1,7 +1,6 @@
 /* styles.css
    UK Pay Clarity (Lab) — Free UI (frozen) + Premium-ready hooks
-   Goal: No visual change from Free baseline.
-   Premium UI will be injected into #premium-root later.
+   Premium root stays hidden until enabled.
 */
 
 :root{
@@ -219,9 +218,14 @@ details[open] summary::before{ transform: rotate(90deg); }
   .card{ padding: 18px; margin: 12px auto; }
 }
 
-/* ---------------- Premium-ready hooks ----------------
-   Keep premium root hidden until we implement Premium UI.
-*/
+/* ---------------- Premium-ready hooks ---------------- */
+
+/* Keep premium hidden until enabled */
 #premium-root{
   display: none;
+}
+
+/* When we enable premium, we can show premium-root by toggling its display in JS */
+.premiumCard{
+  background: linear-gradient(180deg, var(--surface) 0%, rgba(30, 58, 138, 0.03) 100%);
 }
